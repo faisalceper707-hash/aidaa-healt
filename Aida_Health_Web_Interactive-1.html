@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aida Health • Interactive Web</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Poppins:wght@600&amp;display=swap');
+        
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+        
+        .header-font {
+            font-family: 'Poppins', system-ui, sans-serif;
+        }
+
+        .nav-active {
+            background-color: #c27b6e;
+            color: white;
+            border-radius: 9999px;
+        }
+
+        .check-item {
+            transition: all 0.2s ease;
+        }
+        
+        .check-item:hover {
+            background-color: #fdfaf7;
+        }
+
+        .section-title {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: #c27b6e;
+        }
+
+        .motivasi {
+            background: linear-gradient(135deg, #fdfaf7, #f8f1eb);
+            border-left: 4px solid #c27b6e;
+        }
+
+        .report-card {
+            transition: all 0.2s ease;
+        }
+
+        .notification-banner {
+            background: linear-gradient(90deg, #fef3e8, #fdfaf7);
+            border: 1px solid #f5d9b8;
+        }
+    </style>
+</head>
+<body class="bg-[#fdfaf7] min-h-screen pb-12">
+    <!-- Header -->
+    <div class="bg-white border-b border-[#f0e0d8]">
+        <div class="max-w-2xl mx-auto px-4 py-5 flex items-center justify-between">
+            <div>
+                <h1 class="header-font text-2xl font-semibold text-[#3f2e2b]">Aida Health</h1>
+                <p class="text-xs text-[#8b6f65]">Jaga kesehatan berdua 🌿</p>
+            </div>
+            <div class="flex items-center gap-x-2 text-sm">
+                <div class="px-3 py-1 bg-[#fdfaf7] rounded-full text-xs flex items-center gap-x-1.5 border border-[#f0e0d8]">
+                    <i class="fa-solid fa-heart text-[#c27b6e]"></i>
+                    <span class="font-medium text-[#5c463f]">Aida &amp; Aa</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="max-w-2xl mx-auto px-4 pt-4">
+        <div class="flex bg-white rounded-3xl p-1 shadow-sm border border-[#f0e0d8]">
+            <button onclick="switchTab('rules')" id="tab-rules"
+                    class="flex-1 py-2.5 text-sm font-medium flex items-center justify-center gap-x-2 rounded-3xl transition-all tab-btn">
+                <i class="fa-solid fa-book"></i>
+                <span>Rules</span>
+            </button>
+            <button onclick="switchTab('checklist')" id="tab-checklist"
+                    class="flex-1 py-2.5 text-sm font-medium flex items-center justify-center gap-x-2 rounded-3xl transition-all tab-btn nav-active">
+                <i class="fa-solid fa-check-circle"></i>
+                <span>Checklist</span>
+            </button>
+            <button onclick="switchTab('dashboard')" id="tab-dashboard"
+                    class="flex-1 py-2.5 text-sm font-medium flex items-center justify-center gap-x-2 rounded-3xl transition-all tab-btn">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Dashboard Aa</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Streak Banner -->
+    <div id="streak-banner" class="max-w-2xl mx-auto px-4 pt-3 hidden">
+        <div class="bg-gradient-to-r from-[#c27b6e] to-[#a65d52] text-white px-4 py-2.5 rounded-2xl flex items-center justify-between text-sm">
+            <div class="flex items-center gap-x-2">
+                <i class="fa-solid fa-fire text-lg"></i>
+                <span><span id="streak-count">0</span> hari berturut-turut 🔥</span>
+            </div>
+            <span class="text-xs opacity-80">Terus semangat!</span>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="max-w-2xl mx-auto px-4 pt-6">
+
+        <!-- RULES TAB -->
+        <div id="content-rules" class="tab-content hidden">
+            <div class="mb-6">
+                <h2 class="text-xl font-semibold text-[#3f2e2b]">Rules Bersama</h2>
+                <p class="text-sm text-[#8b6f65]">Panduan kesehatan untuk Aida &amp; Aa</p>
+            </div>
+
+            <div class="space-y-4">
+                <!-- New Rules -->
+                <div>
+                    <div class="inline-flex items-center gap-x-2 px-3 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full mb-3">
+                        <i class="fa-solid fa-star"></i>
+                        <span>BARU</span>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <div class="bg-white border border-[#f0e0d8] rounded-2xl p-4">
+                            <div class="flex gap-3">
+                                <span class="text-xl mt-0.5">🌙</span>
+                                <div>
+                                    <p class="font-semibold text-sm">Lepas CD &amp; BH setiap hari di rumah</p>
+                                    <p class="text-xs text-[#8b6f65] mt-1">Biarkan tubuh bernafas dan mengurangi kelembaban.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white border border-[#f0e0d8] rounded-2xl p-4">
+                            <div class="flex gap-3">
+                                <span class="text-xl mt-0.5">🌬️</span>
+                                <div>
+                                    <p class="font-semibold text-sm">Miss V harus selalu kering</p>
+                                    <p class="text-xs text-[#8b6f65] mt-1">Setiap habis pipis atau mandi, lap sampai kering.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-[#f0e0d8]">
+                    <p class="section-title mb-3">KEBERSIHAN &amp; MINUM</p>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex gap-3 bg-white p-3 rounded-xl border border-[#f0e0d8]">
+                            <span>💧</span>
+                            <span>Minum setiap 3 jam (½ gelas) + 1 gelas setelah makan, bangun tidur, dan sebelum tidur.</span>
+                        </div>
+                        <div class="flex gap-3 bg-white p-3 rounded-xl border border-[#f0e0d8]">
+                            <span>🫘</span>
+                            <span>Tempe minimal 1x seminggu sebagai probiotik alami.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHECKLIST TAB -->
+        <div id="content-checklist" class="tab-content">
+            <div class="mb-5">
+                <div class="flex items-end justify-between">
+                    <div>
+                        <h2 class="text-xl font-semibold">Checklist Hari Ini</h2>
+                        <p class="text-xs text-[#8b6f65]" id="today-date"></p>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-xs text-[#8b6f65]">Progress</div>
+                        <div class="text-2xl font-bold text-[#c27b6e]" id="progress-text">0/14</div>
+                    </div>
+                </div>
+                <div class="mt-2 h-2 bg-[#f0e0d8] rounded-full overflow-hidden">
+                    <div id="progress-bar" class="h-2 bg-[#c27b6e] transition-all" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Motivasi -->
+            <div class="motivasi p-4 rounded-2xl mb-5 text-sm text-[#5c463f]">
+                <i class="fa-solid fa-heart mr-2 text-[#c27b6e]"></i>
+                <span id="motivasi-text">Kamu udah bagus banget, sayang. Terusin ya 🌸</span>
+            </div>
+
+            <!-- Checklist Items -->
+            <div class="space-y-2 mb-6" id="checklist-list">
+                <!-- Generated by JS -->
+            </div>
+
+            <!-- Catatan -->
+            <div class="mb-4">
+                <label class="block text-xs font-semibold text-[#5c463f] mb-1.5">Catatan buat Aa</label>
+                <textarea id="note-input" class="w-full border border-[#f0e0d8] rounded-2xl p-3 text-sm" rows="3" 
+                          placeholder="Mau cerita apa hari ini?"></textarea>
+            </div>
+
+            <button onclick="saveChecklist()" 
+                    class="w-full bg-[#c27b6e] hover:bg-[#a65d52] text-white font-semibold py-3.5 rounded-2xl flex items-center justify-center gap-x-2">
+                <i class="fa-solid fa-paper-plane"></i>
+                <span>Simpan &amp; Kirim ke Aa</span>
+            </button>
+        </div>
+
+        <!-- DASHBOARD TAB -->
+        <div id="content-dashboard" class="tab-content hidden">
+            <div class="mb-5">
+                <h2 class="text-xl font-semibold">Dashboard Aa</h2>
+                <p class="text-xs text-[#8b6f65]">Laporan Aida akan muncul di sini</p>
+            </div>
+
+            <div id="dashboard-content">
+                <!-- Generated by JS -->
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Tailwind script
+        function initTailwind() {
+            document.documentElement.style.setProperty('--accent', '#c27b6e');
+        }
+
+        // Data
+        const CHECKS = [
+            { id: "c1", label: "Cebok dari depan ke belakang" },
+            { id: "c2", label: "Lap miss V kering setelah kamar mandi" },
+            { id: "c3", label: "Lepas CD & BH di rumah" },
+            { id: "c4", label: "Ganti celana dalam (pagi)" },
+            { id: "c5", label: "Ganti celana dalam (sore/malam)" },
+            { id: "c6", label: "Minum jam 06.00 🌅" },
+            { id: "c7", label: "Minum jam 09.00 ☀️" },
+            { id: "c8", label: "Minum jam 12.00 🌤️" },
+            { id: "c9", label: "Minum jam 15.00 🌥️" },
+            { id: "c10", label: "Minum jam 18.00 🌇" },
+            { id: "c11", label: "Minum 1 gelas setelah makan" },
+            { id: "c12", label: "Minum 1 gelas habis bangun tidur" },
+            { id: "c13", label: "Minum 1 gelas sebelum tidur" },
+            { id: "c14", label: "Konsumsi tempe / probiotik hari ini" }
+        ];
+
+        const MOTIVASI = [
+            "Kamu udah bagus banget, sayang. Terusin ya 🌸",
+            "Pelan-pelan tapi pasti — Aa bangga sama kamu 💕",
+            "Setiap langkah kecil itu penting. Kamu luar biasa 🌷",
+            "Jaga diri baik-baik ya, Aida. Aa sayang kamu 🤍"
+        ];
+
+        let reports = [];
+        let currentTab = 'checklist';
+
+        // Load from localStorage
+        function loadData() {
+            const savedReports = localStorage.getItem('aida_health_reports');
+            if (savedReports) reports = JSON.parse(savedReports);
+        }
+
+        // Hitung Streak
+        function calculateStreak() {
+            if (reports.length === 0) return 0;
+
+            const sorted = [...reports].sort((a, b) => b.dateKey.localeCompare(a.dateKey));
+            let streak = 0;
+            let currentDate = new Date();
+            currentDate.setHours(0,0,0,0);
+
+            for (let i = 0; i < sorted.length; i++) {
+                const reportDate = new Date(sorted[i].dateKey);
+                reportDate.setHours(0,0,0,0);
+
+                const diffDays = Math.floor((currentDate - reportDate) / (1000 * 60 * 60 * 24));
+
+                if (diffDays === streak) {
+                    streak++;
+                    currentDate = reportDate;
+                } else if (diffDays > streak) {
+                    break;
+                }
+            }
+            return streak;
+        }
+
+        function updateStreakBanner() {
+            const streak = calculateStreak();
+            const banner = document.getElementById('streak-banner');
+            const countEl = document.getElementById('streak-count');
+
+            if (streak > 0) {
+                countEl.innerText = streak;
+                banner.classList.remove('hidden');
+            } else {
+                banner.classList.add('hidden');
+            }
+        }
+
+        function saveData() {
+            localStorage.setItem('aida_health_reports', JSON.stringify(reports));
+        }
+
+        // Switch Tab
+        function switchTab(tab) {
+            // Hide all
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('nav-active'));
+
+            // Show selected
+            document.getElementById('content-' + tab).classList.remove('hidden');
+            document.getElementById('tab-' + tab).classList.add('nav-active');
+
+            currentTab = tab;
+
+            if (tab === 'dashboard') {
+                renderDashboard();
+            }
+        }
+
+        // Render Checklist
+        function renderChecklist() {
+            const container = document.getElementById('checklist-list');
+            container.innerHTML = '';
+
+            const todayKey = new Date().toISOString().slice(0, 10);
+            const todayReport = reports.find(r => r.dateKey === todayKey);
+            const savedChecked = todayReport ? todayReport.checked : {};
+
+            CHECKS.forEach(item => {
+                const isChecked = savedChecked[item.id] || false;
+
+                const div = document.createElement('div');
+                div.className = `check-item flex items-center gap-3 px-4 py-3 bg-white border border-[#f0e0d8] rounded-2xl cursor-pointer ${isChecked ? 'bg-[#fdfaf7]' : ''}`;
+                div.innerHTML = `
+                    <input type="checkbox" id="${item.id}" ${isChecked ? 'checked' : ''} 
+                           class="w-5 h-5 accent-[#c27b6e]">
+                    <label for="${item.id}" class="flex-1 text-sm cursor-pointer">${item.label}</label>
+                `;
+
+                // Toggle on click
+                div.addEventListener('click', () => {
+                    const checkbox = document.getElementById(item.id);
+                    checkbox.checked = !checkbox.checked;
+                    updateProgress();
+                });
+
+                container.appendChild(div);
+            });
+
+            updateProgress();
+        }
+
+        function updateProgress() {
+            let checkedCount = 0;
+            CHECKS.forEach(item => {
+                const cb = document.getElementById(item.id);
+                if (cb && cb.checked) checkedCount++;
+            });
+
+            const pct = Math.round((checkedCount / CHECKS.length) * 100);
+            document.getElementById('progress-text').innerText = `${checkedCount}/14`;
+            document.getElementById('progress-bar').style.width = `${pct}%`;
+        }
+
+        // Save Checklist
+        function saveChecklist() {
+            const checked = {};
+            let checkedCount = 0;
+
+            CHECKS.forEach(item => {
+                const cb = document.getElementById(item.id);
+                if (cb && cb.checked) {
+                    checked[item.id] = true;
+                    checkedCount++;
+                }
+            });
+
+            const note = document.getElementById('note-input').value.trim();
+            const todayKey = new Date().toISOString().slice(0, 10);
+            const dateLabel = new Date().toLocaleDateString('id-ID', { 
+                weekday: 'long', day: 'numeric', month: 'long' 
+            });
+
+            const pct = Math.round((checkedCount / CHECKS.length) * 100);
+
+            // Update or add report
+            const existingIndex = reports.findIndex(r => r.dateKey === todayKey);
+            const reportData = {
+                dateKey: todayKey,
+                dateLabel: dateLabel,
+                checked: checked,
+                note: note,
+                pct: pct,
+                doneCount: checkedCount,
+                timestamp: new Date().toISOString()
+            };
+
+            if (existingIndex >= 0) {
+                reports[existingIndex] = reportData;
+            } else {
+                reports.push(reportData);
+            }
+
+            saveData();
+            updateStreakBanner();
+
+            // Show success toast
+            const toast = document.createElement('div');
+            toast.className = `fixed bottom-6 left-1/2 -translate-x-1/2 bg-[#3f2e2b] text-white px-6 py-3 rounded-2xl text-sm flex items-center gap-x-2 shadow-lg`;
+            toast.innerHTML = `
+                <i class="fa-solid fa-check-circle"></i>
+                <span>Laporan berhasil disimpan! 💌</span>
+            `;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.transition = 'all 0.3s';
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 2200);
+
+            // Tampilkan opsi kirim ke WhatsApp
+            setTimeout(() => {
+                showWhatsAppOption(reportData);
+            }, 800);
+        }
+
+        // Tampilkan tombol kirim ke WhatsApp setelah submit
+        function showWhatsAppOption(reportData) {
+            const existing = document.getElementById('whatsapp-option');
+            if (existing) existing.remove();
+
+            const container = document.createElement('div');
+            container.id = 'whatsapp-option';
+            container.className = `fixed bottom-6 left-1/2 -translate-x-1/2 bg-white border border-[#f0e0d8] shadow-xl rounded-2xl p-4 w-[92%] max-w-md z-[999]`;
+            
+            const message = generateWhatsAppMessage(reportData);
+
+            container.innerHTML = `
+                <div class="text-center">
+                    <p class="text-sm font-semibold text-[#3f2e2b] mb-3">Mau kirim langsung ke Aa via WhatsApp?</p>
+                    
+                    <div class="flex gap-3">
+                        <button onclick="sendToWhatsApp('${encodeURIComponent(message)}'); document.getElementById('whatsapp-option').remove();" 
+                                class="flex-1 flex items-center justify-center gap-x-2 bg-[#25D366] hover:bg-[#128C7E] text-white py-3 rounded-xl font-semibold text-sm">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                            <span>Kirim ke WhatsApp</span>
+                        </button>
+                        
+                        <button onclick="document.getElementById('whatsapp-option').remove()" 
+                                class="flex-1 border border-[#f0e0d8] py-3 rounded-xl text-sm font-medium">
+                            Nanti Saja
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(container);
+        }
+
+        function generateWhatsAppMessage(report) {
+            let text = `🌸 *Laporan Kesehatan Aida* 🌸\n\n`;
+            text += `📅 *Tanggal:* ${report.dateLabel}\n`;
+            text += `📊 *Progress:* ${report.pct}% (${report.doneCount}/14)\n\n`;
+
+            text += `✅ *Checklist yang sudah dilakukan:*\n`;
+            
+            let count = 1;
+            Object.keys(report.checked).forEach(key => {
+                const item = CHECKS.find(c => c.id === key);
+                if (item) {
+                    text += `${count}. ${item.label}\n`;
+                    count++;
+                }
+            });
+
+            if (report.note) {
+                text += `\n💬 *Catatan:*\n${report.note}\n`;
+            }
+
+            text += `\nSemangat ya sayang! 💕\n_Aa_`;
+            return text;
+        }
+
+        function sendToWhatsApp(encodedMessage) {
+            // Nomor WhatsApp Aa
+            const phoneNumber = "6289652246347";
+            const url = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            window.open(url, '_blank');
+        }
+
+        // Render Dashboard
+        function renderDashboard() {
+            const container = document.getElementById('dashboard-content');
+            container.innerHTML = '';
+
+            if (reports.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12">
+                        <i class="fa-solid fa-inbox text-4xl text-[#d4b9b0] mb-4"></i>
+                        <p class="font-semibold">Belum ada laporan</p>
+                        <p class="text-xs text-[#8b6f65] mt-1">Aida belum mengisi checklist hari ini.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Sort by date descending
+            const sorted = [...reports].sort((a, b) => b.dateKey.localeCompare(a.dateKey));
+
+            sorted.forEach(report => {
+                const card = document.createElement('div');
+                card.className = `report-card bg-white border border-[#f0e0d8] rounded-2xl p-4 mb-3`;
+                
+                let checkedList = '';
+                Object.keys(report.checked).forEach(key => {
+                    const item = CHECKS.find(c => c.id === key);
+                    if (item) {
+                        checkedList += `<span class="inline-block text-xs bg-[#fdfaf7] px-2.5 py-0.5 rounded-full mr-1 mb-1">${item.label}</span>`;
+                    }
+                });
+
+                card.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="text-xs text-[#8b6f65]">${report.dateLabel}</div>
+                            <div class="flex items-baseline gap-x-2 mt-0.5">
+                                <span class="text-3xl font-bold" style="color: ${report.pct >= 80 ? '#4CAF7D' : '#c27b6e'}">${report.pct}%</span>
+                                <span class="text-xs text-[#8b6f65]">${report.doneCount}/14 selesai</span>
+                            </div>
+                        </div>
+                        <button onclick="showReplyModal('${report.dateKey}')" 
+                                class="text-xs px-3 py-1 border border-[#c27b6e] text-[#c27b6e] rounded-full hover:bg-[#fdfaf7]">
+                            <i class="fa-solid fa-reply mr-1"></i> Balas
+                        </button>
+                    </div>
+
+                    ${report.note ? `<div class="mt-3 text-sm bg-[#fdfaf7] p-3 rounded-xl">"${report.note}"</div>` : ''}
+
+                    <div class="mt-3 flex flex-wrap gap-1">
+                        ${checkedList || '<span class="text-xs text-[#8b6f65]">Tidak ada checklist dicentang</span>'}
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+        }
+
+        // Show reply modal
+        function showReplyModal(dateKey) {
+            const modal = document.createElement('div');
+            modal.className = `fixed inset-0 bg-black/50 flex items-end justify-center z-[999]`;
+            modal.innerHTML = `
+                <div class="bg-white w-full max-w-md rounded-t-3xl p-5">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="font-semibold">Balas Aida</div>
+                        <button class="text-xl text-[#8b6f65]" onclick="this.closest('.fixed').remove()">×</button>
+                    </div>
+                    
+                    <textarea id="reply-text" class="w-full border border-[#f0e0d8] rounded-2xl p-3 text-sm" rows="4" 
+                              placeholder="Tulis balasan untuk Aida..."></textarea>
+                    
+                    <div class="flex gap-3 mt-4">
+                        <button onclick="sendReply('${dateKey}', this)" 
+                                class="flex-1 bg-[#c27b6e] text-white py-3 rounded-2xl font-semibold">
+                            Kirim Balasan 💌
+                        </button>
+                        <button onclick="this.closest('.fixed').remove()" 
+                                class="flex-1 border border-[#f0e0d8] py-3 rounded-2xl font-semibold">
+                            Batal
+                        </button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        function sendReply(dateKey, btn) {
+            const textarea = document.getElementById('reply-text');
+            const replyText = textarea.value.trim();
+            
+            if (!replyText) return;
+
+            // Simpan balasan (untuk demo, kita simpan di localStorage juga)
+            let replies = JSON.parse(localStorage.getItem('aida_replies') || '{}');
+            replies[dateKey] = replyText;
+            localStorage.setItem('aida_replies', JSON.stringify(replies));
+
+            btn.closest('.fixed').remove();
+            
+            // Refresh dashboard
+            renderDashboard();
+            
+            // Toast
+            const toast = document.createElement('div');
+            toast.className = `fixed bottom-6 left-1/2 -translate-x-1/2 bg-green-600 text-white px-5 py-3 rounded-2xl text-sm`;
+            toast.innerHTML = `Balasan terkirim! 💌`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2000);
+        }
+
+        // Initialize
+        function init() {
+            initTailwind();
+            loadData();
+
+            // Set tanggal
+            const dateEl = document.getElementById('today-date');
+            dateEl.innerText = new Date().toLocaleDateString('id-ID', { 
+                weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' 
+            });
+
+            // Motivasi random
+            const motivasiEl = document.getElementById('motivasi-text');
+            motivasiEl.innerText = MOTIVASI[Math.floor(Math.random() * MOTIVASI.length)];
+
+            // Render checklist
+            renderChecklist();
+
+            // Update Streak
+            updateStreakBanner();
+
+            // Set default tab
+            document.getElementById('content-checklist').classList.remove('hidden');
+            document.getElementById('tab-checklist').classList.add('nav-active');
+
+            // Keyboard shortcut
+            document.addEventListener('keydown', function(e) {
+                if (e.metaKey && e.key === "/") {
+                    e.preventDefault();
+                    switchTab('checklist');
+                }
+            });
+
+            // === NOTIFIKASI HARIAN ===
+            checkDailyReminder();
+        }
+
+        // Cek dan tampilkan reminder harian
+        function checkDailyReminder() {
+            const todayKey = new Date().toISOString().slice(0, 10);
+            const todayReport = reports.find(r => r.dateKey === todayKey);
+            const hasFilled = todayReport && todayReport.doneCount > 0;
+
+            // Tampilkan banner jika belum isi checklist hari ini
+            if (!hasFilled) {
+                showReminderBanner();
+            }
+        }
+
+        function showReminderBanner() {
+            if (document.getElementById('reminder-banner')) return;
+
+            const banner = document.createElement('div');
+            banner.id = 'reminder-banner';
+            banner.className = `notification-banner mx-4 mt-4 mb-2 px-4 py-3 rounded-2xl flex items-start gap-3 text-sm`;
+            banner.innerHTML = `
+                <div class="flex-1">
+                    <div class="flex items-center gap-x-2">
+                        <i class="fa-solid fa-bell text-[#c27b6e]"></i>
+                        <span class="font-semibold text-[#5c463f]">Pengingat Harian</span>
+                    </div>
+                    <p class="text-xs text-[#8b6f65] mt-1">Kamu belum isi checklist hari ini. Yuk isi sekarang biar konsisten! 🌸</p>
+                </div>
+                <div class="flex flex-col gap-y-1">
+                    <button onclick="enableNotifications(this)" 
+                            class="text-xs px-3 py-1 bg-white border border-[#c27b6e] text-[#c27b6e] rounded-full hover:bg-[#fdfaf7]">
+                        Aktifkan Notif
+                    </button>
+                    <button onclick="this.closest('#reminder-banner').remove()" 
+                            class="text-xs text-[#8b6f65] hover:text-[#5c463f]">
+                        Nanti
+                    </button>
+                </div>
+            `;
+
+            const nav = document.querySelector('.max-w-2xl.mx-auto.px-4.pt-4');
+            if (nav) {
+                nav.parentNode.insertBefore(banner, nav.nextSibling);
+            }
+        }
+
+        // Minta izin notifikasi browser
+        async function enableNotifications(button) {
+            if (!('Notification' in window)) {
+                alert('Browser kamu tidak mendukung notifikasi.');
+                return;
+            }
+
+            const permission = await Notification.requestPermission();
+
+            if (permission === 'granted') {
+                button.innerHTML = 'Notifikasi Aktif ✓';
+                button.disabled = true;
+
+                new Notification('Aida Health', {
+                    body: 'Notifikasi harian berhasil diaktifkan! Kamu akan diingatkan untuk isi checklist setiap hari 🌸',
+                    icon: 'https://cdn-icons-png.flaticon.com/512/2961/2961948.png'
+                });
+
+                localStorage.setItem('notification_enabled', 'true');
+            } else {
+                alert('Kamu menolak notifikasi. Bisa diaktifkan nanti melalui pengaturan browser.');
+            }
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
